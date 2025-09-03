@@ -5,7 +5,7 @@ export default function AnimatedForm() {
     <div className="p-4 sm:p-8 animated-form-container ">
       <div className="animated-form">
         <h2 className="text-3xl font-bold text-center mb-6 text-gray-800">Get in Touch</h2>
-        <p className="text-center text-gray-500 mb-8">We'd love to hear from you. Plan your next adventure with us!</p>
+        <p className="text-center text-gray-500 mb-8">We&apos;d love to hear from you. Plan your next adventure with us!</p>
         <form action="" className="flex flex-col gap-6 w-[400px] mx-auto">
           <input
             type="text"

@@ -2,16 +2,16 @@ import Image from "next/image";
 
 export const revalidate = 120;
 
-async function getTestimonials() {
-  const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000";
-  const res = await fetch(`${API_BASE}/api/testimonials`, { next: { revalidate: 120 } });
-  if (!res.ok) return [] as any[];
-  return res.json();
+interface Testimonial {
+    id: number;
+    quote: string;
+    avatar: string;
+    name: string;
+    title: string;
 }
 
 export default async function Testimonials() {
-//   const testimonials = await getTestimonials();
-const testimonials = [
+const testimonials: Testimonial[] = [
     {
         "id": 1,
         "quote": "\"An unforgettable journey! The attention to detail and the amazing guides made this the trip of a lifetime.\"",
@@ -36,7 +36,7 @@ const testimonials = [
 ]
   return (
     <div className="grid gap-6 md:grid-cols-3">
-      {testimonials.map((t: any) => (
+      {testimonials.map((t) => (
         <figure key={t.id} className="rounded-2xl border border-border bg-white p-6 shadow-sm">
           <blockquote className="text-gray-700 leading-relaxed">{t.quote}</blockquote>
           <figcaption className="mt-4 flex items-center gap-3">
