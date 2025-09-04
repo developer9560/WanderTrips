@@ -151,7 +151,6 @@ export default function UpcomingTrips() {
     const content = contentRef.current;
     if (!container || !content) return;
 
-    const containerWidth = container.offsetWidth;
     const contentWidth = content.scrollWidth / 2; // Since we duplicate the items
 
     // Reset position when scrolled to end
@@ -193,21 +192,21 @@ export default function UpcomingTrips() {
     document.addEventListener('mouseup', handleMouseUp);
   };
 
-  const handleMouseMove = (e: MouseEvent) => {
+  const handleMouseMove = useCallback((e: MouseEvent) => {
     if (!isDragging.current || !contentRef.current) return;
     e.preventDefault();
     
     const x = e.pageX - (contentRef.current.offsetLeft || 0);
     const walk = (x - startPos.current) * 1.5; // Scroll speed multiplier
     api.start({ x: scrollLeft.current + walk, immediate: true });
-  };
+  }, [api]);
 
-  const handleMouseUp = () => {
+  const handleMouseUp = useCallback(() => {
     isDragging.current = false;
     document.removeEventListener('mousemove', handleMouseMove);
     document.removeEventListener('mouseup', handleMouseUp);
     lastScrollTime.current = Date.now();
-  };
+  }, [handleMouseMove]);
 
   // Handle touch events for mobile
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -219,7 +218,7 @@ export default function UpcomingTrips() {
     scrollLeft.current = springs.x.get();
   };
 
-  const handleTouchMove = (e: any) => {
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
     if (!isTouchActive.current || !contentRef.current) return;
     const touch = e.touches && e.touches[0];
     if (!touch) return;
@@ -243,13 +242,13 @@ export default function UpcomingTrips() {
     }
   };
 
-  const handleTouchEnd = () => {
+  const handleTouchEnd = useCallback(() => {
     isDragging.current = false;
     isTouchActive.current = false;
     hasTouchDirection.current = false;
     isHorizontalTouchDrag.current = false;
     lastScrollTime.current = Date.now();
-  };
+  }, []);
 
   // Clean up event listeners
   useEffect(() => {
@@ -260,13 +259,13 @@ export default function UpcomingTrips() {
       document.removeEventListener('mouseup', handleMouseUp);
       document.removeEventListener('touchend', handleTouchEnd);
     };
-  }, []);
+  }, [handleMouseUp, handleTouchEnd]);
 
   return (
     <section className="py-6 ">
       <div className="container mx-auto">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-3xl font-bold text-secondary ">Upcoming Trips</h2>
+          <h2 className="text-2xl font-bold text-secondary ">Upcoming Trips</h2>
           <Link href="/trips" className="text-primary font-medium hover:underline">
             See All →
           </Link>
