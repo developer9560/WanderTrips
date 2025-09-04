@@ -13,8 +13,8 @@ const navItems = [
         label: "Home",
     },
     {
-        href: "/trips",
-        label: "Trips",
+        href: "/upcoming-trips",
+        label: "Upcoming Trips",
     },
     {
         href: "/about",
@@ -54,7 +54,7 @@ const navLinks = [
       { title: "New Zealand", href: "/trips/new-zealand" },
     ],
   },
-  { title: "India Trips",
+  { title: "Domestic Trips",
     dropdown: [
       { title: "Ladakh", href: "/trips/ladakh" },
       { title: "Rajasthan", href: "/trips/rajasthan" },

@@ -19,7 +19,9 @@ export interface Trip {
   location: string;
   duration: number; // days
   rating: number;
-  price: number; // base price in INR
+  price: number; // discounted price in INR
+  originalPrice?: number; // original price, if any
+  availableDates?: string[];
   image: string; // cover
   gallery?: string[];
   difficulty?: "Easy" | "Moderate" | "Challenging";

@@ -2,6 +2,7 @@ import Link from "next/link";
 import TripCard from "@/components/TripCard";
 import PartnerLogos from "@/components/PartnerLogos";
 import Testimonials from "@/components/Testimonials";
+import UpcomingTrips from "@/components/UpcomingTrips";
 import { Trip } from "@/types/trip";
 
 export const revalidate = 60;
@@ -65,13 +66,13 @@ export default async function Home() {
   const trips = trips_data;
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-4">
 
 
 
 
       {/* Hero */}
-      <section className="relative overflow-hidden h-[70vh] z-[-1]"> 
+      <section className="relative overflow-hidden h-[70vh] z-[-1] "> 
         <div className="absolute inset-0 z-[-1]">
 
           <video autoPlay loop muted className="w-full h-full object-cover z-[-1]">
@@ -96,7 +97,7 @@ export default async function Home() {
         </div>
       </section>
 
-      
+      <UpcomingTrips />
 
       {/* Featured trips */}
       <section className="container ">
